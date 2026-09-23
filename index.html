@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>CREPERIE</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+
+        /* =========================================
+           VARIABLES
+        ========================================= */
+
+        :root {
+
+            --bg-color: #050608;
+
+            --card-bg: #12181f;
+
+            --text-main: #ffffff;
+
+            --accent: #c5a880;
+
+            /* RED NEON */
+
+            --neon-core: #ffffff;
+
+            --neon-red: #ff1a1a;
+
+            --neon-red-glow: #ff4d4d;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #15191f 0%,
+                    #090b0f 35%,
+                    #050608 75%
+                );
+
+            color: var(--text-main);
+
+            min-height: 100vh;
+
+            padding: 25px;
+
+            overflow-x: hidden;
+
+            position: relative;
+        }
+
+
+        /* =========================================
+           NEON SIDE LIGHTS
+        ========================================= */
+
+        body::before,
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            top: 0;
+
+            width: 5px;
+
+            height: 100vh;
+
+            z-index: 1000;
+
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    var(--neon-core),
+                    var(--neon-red)
+                );
+
+            box-shadow:
+
+                0 0 4px #ffffff,
+
+                0 0 10px var(--neon-red),
+
+                0 0 25px var(--neon-red),
+
+                0 0 45px var(--neon-red-glow);
+
+            animation:
+                neonPulse 1.8s
+                infinite alternate ease-in-out;
+        }
+
+
+        body::before {
+            left: 0;
+        }
+
+
+        body::after {
+            right: 0;
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .landing-container {
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            min-height: calc(100vh - 50px);
+
+            margin: 0 auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .landing-logo {
+
+            margin-bottom: 50px;
+
+            padding: 20px 10px;
+
+            animation:
+                logoAppear 0.8s ease forwards;
+        }
+
+
+        .landing-logo h1 {
+
+            font-family:
+                "Archivo Black",
+                sans-serif;
+
+            font-size:
+                clamp(2.7rem, 7vw, 5rem);
+
+            letter-spacing:
+                clamp(4px, 1vw, 10px);
+
+            text-transform: uppercase;
+
+            line-height: 1;
+
+            color: #ffffff;
+
+            margin-bottom: 14px;
+
+            text-shadow:
+
+                0 0 5px #ffffff,
+
+                0 0 15px var(--neon-red),
+
+                0 0 30px var(--neon-red-glow),
+
+                0 0 55px rgba(255, 26, 26, 0.45);
+        }
+
+
+        .landing-logo p {
+
+            color: var(--accent);
+
+            font-size: 0.95rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 5px;
+
+            text-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.8);
+        }
+
+
+        /* =========================================
+           CATEGORY GRID
+
+           DESKTOP:
+           3 CARDS IN ONE ROW
+        ========================================= */
+
+        .category-choices {
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 24px;
+        }
+
+
+        .choice-link {
+
+            display: block;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            border-radius: 24px;
+
+            animation:
+                cardAppear 0.65s ease both;
+        }
+
+
+        /*
+            Small staggered animation
+            when page opens
+        */
+
+        .choice-link:nth-child(1) {
+            animation-delay: 0.10s;
+        }
+
+
+        .choice-link:nth-child(2) {
+            animation-delay: 0.22s;
+        }
+
+
+        .choice-link:nth-child(3) {
+            animation-delay: 0.34s;
+        }
+
+
+        /* =========================================
+           CARD
+        ========================================= */
+
+        .choice-card {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 330px;
+
+            background:
+                var(--card-bg);
+
+            border:
+                2px solid var(--accent);
+
+            border-radius:
+                24px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            isolation: isolate;
+
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.60);
+
+            transition:
+
+                transform 0.45s
+                cubic-bezier(0.165, 0.84, 0.44, 1),
+
+                border-color 0.35s ease,
+
+                box-shadow 0.4s ease;
+        }
+
+
+        /* =========================================
+           FOOD IMAGE
+        ========================================= */
+
+        .choice-card img {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            z-index: -3;
+
+            transition:
+
+                transform 0.65s
+                cubic-bezier(0.165, 0.84, 0.44, 1),
+
+                filter 0.45s ease;
+        }
+
+
+        /* =========================================
+           DARK IMAGE OVERLAY
+        ========================================= */
+
+        .choice-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            z-index: -2;
+
+            background:
+
+                linear-gradient(
+                    to top,
+
+                    rgba(5, 6, 8, 0.98) 0%,
+
+                    rgba(5, 6, 8, 0.72) 28%,
+
+                    rgba(5, 6, 8, 0.25) 65%,
+
+                    rgba(5, 6, 8, 0.15) 100%
+                );
+
+            transition:
+                background 0.4s ease;
+        }
+
+
+        /*
+            Light sweep animation
+        */
+
+        .choice-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: -30%;
+
+            left: -100%;
+
+            width: 60%;
+
+            height: 160%;
+
+            z-index: -1;
+
+            pointer-events: none;
+
+            transform:
+                rotate(15deg);
+
+            background:
+
+                linear-gradient(
+                    90deg,
+
+                    transparent,
+
+                    rgba(255,255,255,0.16),
+
+                    rgba(255, 26, 26, 0.10),
+
+                    transparent
+                );
+
+            transition:
+                left 0.7s ease;
+        }
+
+
+        /* =========================================
+           CATEGORY TITLE
+        ========================================= */
+
+        .choice-card h2 {
+
+            position: relative;
+
+            z-index: 4;
+
+            width: 100%;
+
+            padding:
+
+                25px
+                15px
+                28px;
+
+            font-family:
+                "Archivo Black",
+                sans-serif;
+
+            font-size:
+                clamp(1.35rem, 2vw, 1.8rem);
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #ffffff;
+
+            text-shadow:
+
+                0 3px 8px #000000,
+
+                0 0 12px rgba(0,0,0,0.9);
+
+            transition:
+
+                transform 0.4s ease,
+
+                letter-spacing 0.4s ease,
+
+                text-shadow 0.4s ease;
+        }
+
+
+        /* =========================================
+           HOVER ANIMATION
+        ========================================= */
+
+        @media (hover: hover) {
+
+            .choice-link:hover .choice-card {
+
+                transform:
+                    translateY(-12px)
+                    scale(1.025);
+
+                border-color:
+                    #ffffff;
+
+                box-shadow:
+
+                    0 0 6px #ffffff,
+
+                    0 0 15px var(--neon-red),
+
+                    0 0 32px
+                    rgba(255, 26, 26, 0.75),
+
+                    0 25px 45px
+                    rgba(0, 0, 0, 0.75);
+            }
+
+
+            .choice-link:hover
+            .choice-card img {
+
+                transform:
+                    scale(1.12);
+
+                filter:
+                    brightness(1.08)
+                    contrast(1.05);
+            }
+
+
+            .choice-link:hover
+            .choice-card::before {
+
+                background:
+
+                    linear-gradient(
+                        to top,
+
+                        rgba(5, 6, 8, 0.97) 0%,
+
+                        rgba(5, 6, 8, 0.62) 28%,
+
+                        rgba(5, 6, 8, 0.15) 70%,
+
+                        rgba(5, 6, 8, 0.05) 100%
+                    );
+            }
+
+
+            /*
+                Sweeping neon light
+            */
+
+            .choice-link:hover
+            .choice-card::after {
+
+                left: 160%;
+            }
+
+
+            .choice-link:hover
+            .choice-card h2 {
+
+                transform:
+                    translateY(-6px);
+
+                letter-spacing:
+                    4px;
+
+                text-shadow:
+
+                    0 3px 8px #000000,
+
+                    0 0 8px #ffffff,
+
+                    0 0 18px
+                    var(--neon-red);
+            }
+
+        }
+
+
+        /* =========================================
+           CLICK / MOBILE TOUCH
+        ========================================= */
+
+        .choice-link:active
+        .choice-card {
+
+            transform:
+                scale(0.96);
+
+            border-color:
+                #ffffff;
+
+            box-shadow:
+
+                0 0 8px #ffffff,
+
+                0 0 20px var(--neon-red),
+
+                0 0 40px
+                var(--neon-red-glow);
+        }
+
+
+        /* =========================================
+           ANIMATIONS
+        ========================================= */
+
+        @keyframes neonPulse {
+
+            0%,
+            100% {
+
+                filter:
+                    brightness(1);
+
+                box-shadow:
+
+                    0 0 4px #ffffff,
+
+                    0 0 12px var(--neon-red),
+
+                    0 0 25px var(--neon-red),
+
+                    0 0 45px
+                    var(--neon-red-glow);
+            }
+
+
+            50% {
+
+                filter:
+                    brightness(1.25);
+
+                box-shadow:
+
+                    0 0 6px #ffffff,
+
+                    0 0 16px var(--neon-red),
+
+                    0 0 35px var(--neon-red),
+
+                    0 0 60px
+                    var(--neon-red-glow);
+            }
+        }
+
+
+        @keyframes logoAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(-20px);
+            }
+
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(35px)
+                    scale(0.95);
+            }
+
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =========================================
+           TABLET
+
+           2 CARDS PER ROW
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .landing-container {
+
+                max-width: 760px;
+            }
+
+
+            .category-choices {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+
+            /*
+                Last card centered
+            */
+
+            .choice-link:last-child {
+
+                grid-column:
+                    1 / -1;
+
+                width: calc(50% - 12px);
+
+                justify-self: center;
+            }
+
+
+            .choice-card {
+
+                height: 270px;
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+
+           1 CARD PER ROW
+        ========================================= */
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding:
+                    18px;
+            }
+
+
+            .landing-container {
+
+                justify-content:
+                    flex-start;
+
+                min-height:
+                    auto;
+
+                padding-top:
+                    30px;
+
+                padding-bottom:
+                    40px;
+            }
+
+
+            .landing-logo {
+
+                margin-bottom:
+                    30px;
+
+                padding:
+                    10px 5px;
+            }
+
+
+            .landing-logo h1 {
+
+                font-size:
+                    2.6rem;
+
+                letter-spacing:
+                    5px;
+            }
+
+
+            .landing-logo p {
+
+                font-size:
+                    0.78rem;
+
+                letter-spacing:
+                    3px;
+            }
+
+
+            .category-choices {
+
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    18px;
+            }
+
+
+            .choice-link:last-child {
+
+                grid-column:
+                    auto;
+
+                width:
+                    100%;
+            }
+
+
+            .choice-card {
+
+                height:
+                    190px;
+
+                border-radius:
+                    20px;
+            }
+
+
+            .choice-card h2 {
+
+                font-size:
+                    1.4rem;
+
+                padding:
+                    20px;
+
+                letter-spacing:
+                    2px;
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL PHONES
+        ========================================= */
+
+        @media (max-width: 380px) {
+
+            .landing-logo h1 {
+
+                font-size:
+                    2.15rem;
+
+                letter-spacing:
+                    3px;
+            }
+
+
+            .choice-card {
+
+                height:
+                    170px;
+            }
+
+        }
+
+
+        /* =========================================
+           ACCESSIBILITY:
+           REDUCED MOTION
+        ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="landing-container">
+
+
+        <!-- ==============================
+             LOGO
+        =============================== -->
+
+        <header class="landing-logo">
+
+            <h1>
+                CREPERIE
+            </h1>
+
+            <p>
+                Zgjidhni Menunë
+            </p>
+
+        </header>
+
+
+
+        <!-- ==============================
+             CATEGORY CARDS
+        =============================== -->
+
+        <main class="category-choices">
+
+
+            <!-- TË ËMBLA -->
+
+            <a
+                href="embla.html"
+                class="choice-link"
+                aria-label="Hap menunë Të ëmbla"
+            >
+
+                <article class="choice-card">
+
+                    <img
+                        src="krepaembel.jpg"
+                        alt="Krepa të ëmbla"
+                    >
+
+                    <h2>
+                        Të ëmbla
+                    </h2>
+
+                </article>
+
+            </a>
+
+
+
+            <!-- TË KRIPURA -->
+
+            <a
+                href="kripura.html"
+                class="choice-link"
+                aria-label="Hap menunë Të kripura"
+            >
+
+                <article class="choice-card">
+
+                    <img
+                        src="krepakripur.jpg"
+                        alt="Krepa të kripura"
+                    >
+
+                    <h2>
+                        Të kripura
+                    </h2>
+
+                </article>
+
+            </a>
+
+
+
+            <!-- WAFFLE -->
+
+            <a
+                href="waffle.html"
+                class="choice-link"
+                aria-label="Hap menunë Waffle"
+            >
+
+                <article class="choice-card">
+
+                    <img
+                        src="waffle.jpg"
+                        alt="Waffle"
+                    >
+
+                    <h2>
+                        Waffle
+                    </h2>
+
+                </article>
+
+            </a>
+
+
+        </main>
+
+
+    </div>
+
+
+</body>
+</html>

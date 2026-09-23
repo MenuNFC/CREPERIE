@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>CREPERIE - Waffle</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Playfair+Display:ital,wght@1,700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        /* ========================================
+           RESET
+        ======================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+
+        /* ========================================
+           COLORS
+        ======================================== */
+
+        :root {
+
+            /* Background */
+            --bg-color: #ead8d5;
+
+            /* Cards */
+            --card-bg: #ffffff;
+
+            /* Text */
+            --text-main: #281616;
+            --text-muted: #665252;
+
+            /* Main red */
+            --accent: #a33a3a;
+
+            /* Neon */
+            --neon-core: #ffffff;
+            --neon-fluid: #ef9b9b;
+            --neon-glow: #a33a3a;
+
+        }
+
+
+        /* ========================================
+           HTML
+        ======================================== */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        /* ========================================
+           BODY
+        ======================================== */
+
+        body {
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                sans-serif;
+
+            background-color:
+                var(--bg-color);
+
+            color:
+                var(--text-main);
+
+            line-height:
+                1.4;
+
+            padding:
+                20px 24px;
+
+            position:
+                relative;
+
+            min-height:
+                100vh;
+
+            overflow-x:
+                hidden;
+        }
+
+
+        /* ========================================
+           NEON EDGES
+        ======================================== */
+
+        body::before,
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            top: 0;
+
+            width: 5px;
+            height: 100vh;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    var(--neon-core),
+                    var(--neon-fluid)
+                );
+
+            z-index: 1000;
+
+            box-shadow:
+                0 0 4px #fff,
+                0 0 10px var(--neon-fluid),
+                0 0 25px var(--neon-fluid),
+                0 0 45px var(--neon-glow);
+
+            animation:
+                modernNeonPulse 1.8s
+                infinite alternate ease-in-out;
+
+            pointer-events: none;
+        }
+
+
+        body::before {
+            left: 0;
+        }
+
+
+        body::after {
+            right: 0;
+        }
+
+
+        /* ========================================
+           MAIN CONTAINER
+        ======================================== */
+
+        .menu-container {
+
+            width: 100%;
+
+            max-width:
+                1180px;
+
+            margin:
+                0 auto 60px auto;
+
+            position:
+                relative;
+        }
+
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        .menu-header {
+
+            display: flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            margin-top:
+                15px;
+
+            margin-bottom:
+                28px;
+
+            padding:
+                0 5px;
+        }
+
+
+        /* ========================================
+           BACK BUTTON
+        ======================================== */
+
+        .back-btn {
+
+            background:
+                none;
+
+            border:
+                none;
+
+            color:
+                var(--text-main);
+
+            font-size:
+                1rem;
+
+            font-weight:
+                600;
+
+            text-decoration:
+                none;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            transition:
+                transform 0.25s ease,
+                color 0.25s ease;
+        }
+
+
+        .back-btn:hover {
+
+            color:
+                var(--accent);
+
+            transform:
+                translateX(-4px);
+        }
+
+
+        /* ========================================
+           PAGE TITLE
+        ======================================== */
+
+        .page-title {
+
+            font-family:
+                "Archivo Black",
+                sans-serif;
+
+            font-size:
+                clamp(1.4rem, 4vw, 2rem);
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                2px;
+
+            color:
+                var(--text-main);
+
+            border-bottom:
+                2px solid var(--accent);
+
+            padding-bottom:
+                3px;
+        }
+
+
+        /* ========================================
+           TAB CONTAINER
+        ======================================== */
+
+        .tabs-container {
+
+            display:
+                flex;
+
+            gap:
+                8px;
+
+            margin:
+                0 auto 30px auto;
+
+            background:
+                rgba(40, 22, 22, 0.07);
+
+            padding:
+                5px;
+
+            border-radius:
+                14px;
+
+            max-width:
+                650px;
+        }
+
+
+        /* ========================================
+           TAB BUTTON
+        ======================================== */
+
+        .tab-btn {
+
+            position:
+                relative;
+
+            flex:
+                1;
+
+            background:
+                none;
+
+            border:
+                none;
+
+            padding:
+                12px 6px;
+
+            font-size:
+                0.88rem;
+
+            font-weight:
+                700;
+
+            color:
+                var(--text-muted);
+
+            cursor:
+                pointer;
+
+            border-radius:
+                11px;
+
+            transition:
+                all 0.25s ease;
+
+            text-align:
+                center;
+
+            overflow:
+                hidden;
+        }
+
+
+        .tab-btn:hover {
+
+            color:
+                var(--text-main);
+
+            background:
+                rgba(255,255,255,0.55);
+        }
+
+
+        .tab-btn.active {
+
+            background-color:
+                var(--card-bg);
+
+            color:
+                var(--text-main);
+
+            box-shadow:
+
+                0 4px 12px
+                    rgba(40, 22, 22, 0.08),
+
+                0 0 10px
+                    rgba(239, 155, 155, 0.30);
+
+            border:
+                1px solid
+                rgba(163, 58, 58, 0.25);
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* ========================================
+           MENU PANEL
+        ======================================== */
+
+        .tab-panel {
+
+            display:
+                none;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap:
+                18px;
+
+            animation:
+                fadeIn 0.45s ease forwards;
+        }
+
+
+        .tab-panel.active {
+            display:
+                grid;
+        }
+
+
+        /* ========================================
+           MENU CARD
+        ======================================== */
+
+        .menu-card {
+
+            position:
+                relative;
+
+            background-color:
+                var(--card-bg);
+
+            border:
+                1px solid
+                rgba(40, 22, 22, 0.07);
+
+            border-left:
+                4px solid
+                var(--accent);
+
+            border-radius:
+                16px;
+
+            padding:
+                17px;
+
+            min-height:
+                118px;
+
+            box-shadow:
+                0 6px 15px
+                rgba(70, 30, 30, 0.07);
+
+            transition:
+
+                transform 0.35s
+                    cubic-bezier(0.165, 0.84, 0.44, 1),
+
+                border-color 0.35s ease,
+
+                box-shadow 0.35s ease,
+
+                background-color 0.35s ease;
+
+            overflow:
+                hidden;
+        }
+
+
+        /* ========================================
+           CARD SHINE
+        ======================================== */
+
+        .menu-card::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                -150%;
+
+            width:
+                80%;
+
+            height:
+                100%;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent,
+                    rgba(239, 155, 155, 0.22),
+                    transparent
+                );
+
+            transform:
+                skewX(-20deg);
+
+            transition:
+                left 0.65s ease;
+
+            pointer-events:
+                none;
+        }
+
+
+        /* ========================================
+           CARD BOTTOM GLOW
+        ======================================== */
+
+        .menu-card::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            left:
+                15%;
+
+            bottom:
+                -20px;
+
+            width:
+                70%;
+
+            height:
+                35px;
+
+            background:
+                rgba(163, 58, 58, 0.28);
+
+            filter:
+                blur(22px);
+
+            opacity:
+                0;
+
+            transition:
+                opacity 0.35s ease;
+        }
+
+
+        /* ========================================
+           HOVER
+        ======================================== */
+
+        @media (hover: hover) {
+
+            .menu-card:hover {
+
+                transform:
+                    translateY(-8px)
+                    scale(1.025);
+
+                border-color:
+                    #d77a7a;
+
+                background:
+                    linear-gradient(
+                        145deg,
+                        #ffffff,
+                        #fff7f6
+                    );
+
+                box-shadow:
+
+                    0 0 8px
+                        rgba(239, 155, 155, 0.70),
+
+                    0 0 20px
+                        rgba(163, 58, 58, 0.30),
+
+                    0 16px 30px
+                        rgba(70, 30, 30, 0.14);
+            }
+
+
+            .menu-card:hover::before {
+                left:
+                    160%;
+            }
+
+
+            .menu-card:hover::after {
+                opacity:
+                    1;
+            }
+
+
+            .menu-card:hover .price-badge-container {
+
+                transform:
+                    scale(1.07)
+                    rotate(-1deg);
+
+                box-shadow:
+                    0 0 14px
+                    rgba(239, 155, 155, 0.65);
+            }
+
+
+            .menu-card:hover .item-name {
+
+                color:
+                    #8f2f2f;
+            }
+
+
+            .menu-card:hover .dots-connector {
+
+                border-color:
+                    rgba(163, 58, 58, 0.55);
+            }
+
+        }
+
+
+        /* ========================================
+           CARD TOP
+        ======================================== */
+
+        .card-top {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-bottom:
+                10px;
+
+            gap:
+                10px;
+
+            position:
+                relative;
+
+            z-index:
+                2;
+        }
+
+
+        /* ========================================
+           PRODUCT NAME
+        ======================================== */
+
+        .item-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-style:
+                italic;
+
+            font-weight:
+                700;
+
+            font-size:
+                1.2rem;
+
+            color:
+                var(--text-main);
+
+            transition:
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+
+        /* ========================================
+           DOT CONNECTOR
+        ======================================== */
+
+        .dots-connector {
+
+            flex-grow:
+                1;
+
+            min-width:
+                10px;
+
+            border-bottom:
+                2px dotted
+                rgba(40, 22, 22, 0.16);
+
+            transition:
+                border-color 0.3s ease;
+        }
+
+
+        /* ========================================
+           PRICE
+        ======================================== */
+
+        .price-badge-container {
+
+            background:
+                #381818;
+
+            padding:
+                6px 11px;
+
+            border-radius:
+                8px;
+
+            border:
+                1px solid
+                #a95757;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        .item-price {
+
+            font-family:
+                "Archivo Black",
+                sans-serif;
+
+            font-size:
+                0.82rem;
+
+            color:
+                #ffd1d1;
+
+            white-space:
+                nowrap;
+        }
+
+
+        /* ========================================
+           DESCRIPTION
+        ======================================== */
+
+        .item-desc {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            font-size:
+                0.88rem;
+
+            color:
+                var(--text-muted);
+
+            line-height:
+                1.5;
+        }
+
+
+        /* ========================================
+           NEON ANIMATION
+        ======================================== */
+
+        @keyframes modernNeonPulse {
+
+            0%,
+            100% {
+
+                box-shadow:
+
+                    0 0 4px #fff,
+
+                    0 0 12px
+                        var(--neon-fluid),
+
+                    0 0 25px
+                        var(--neon-fluid),
+
+                    0 0 45px
+                        var(--neon-glow);
+            }
+
+
+            50% {
+
+                box-shadow:
+
+                    0 0 6px #fff,
+
+                    0 0 16px
+                        var(--neon-fluid),
+
+                    0 0 35px
+                        var(--neon-fluid),
+
+                    0 0 60px
+                        var(--neon-glow);
+            }
+
+        }
+
+
+        /* ========================================
+           FADE ANIMATION
+        ======================================== */
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(12px);
+            }
+
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* ========================================
+           CARD APPEAR
+        ======================================== */
+
+        .tab-panel.active .menu-card {
+
+            animation:
+                cardAppear 0.45s ease both;
+        }
+
+
+        .tab-panel.active .menu-card:nth-child(1) {
+            animation-delay: 0.03s;
+        }
+
+        .tab-panel.active .menu-card:nth-child(2) {
+            animation-delay: 0.06s;
+        }
+
+        .tab-panel.active .menu-card:nth-child(3) {
+            animation-delay: 0.09s;
+        }
+
+        .tab-panel.active .menu-card:nth-child(4) {
+            animation-delay: 0.12s;
+        }
+
+        .tab-panel.active .menu-card:nth-child(5) {
+            animation-delay: 0.15s;
+        }
+
+        .tab-panel.active .menu-card:nth-child(6) {
+            animation-delay: 0.18s;
+        }
+
+        .tab-panel.active .menu-card:nth-child(7) {
+            animation-delay: 0.21s;
+        }
+
+        .tab-panel.active .menu-card:nth-child(8) {
+            animation-delay: 0.24s;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(18px)
+                    scale(0.97);
+            }
+
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        /* ========================================
+           TABLET
+        ======================================== */
+
+        @media (max-width: 850px) {
+
+            .menu-container {
+
+                max-width:
+                    720px;
+            }
+
+
+            .tab-panel {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        /* ========================================
+           MOBILE
+        ======================================== */
+
+        @media (max-width: 580px) {
+
+            body {
+
+                padding:
+                    16px 18px;
+            }
+
+
+            .menu-header {
+
+                margin-top:
+                    8px;
+
+                margin-bottom:
+                    22px;
+            }
+
+
+            .page-title {
+
+                font-size:
+                    1.4rem;
+            }
+
+
+            .back-btn {
+
+                font-size:
+                    0.9rem;
+            }
+
+
+            .tabs-container {
+
+                gap:
+                    4px;
+
+                margin-bottom:
+                    22px;
+            }
+
+
+            .tab-btn {
+
+                padding:
+                    10px 3px;
+
+                font-size:
+                    0.77rem;
+            }
+
+
+            .tab-panel {
+
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    14px;
+            }
+
+
+            .menu-card {
+
+                min-height:
+                    auto;
+
+                padding:
+                    16px;
+            }
+
+        }
+
+
+        /* ========================================
+           VERY SMALL PHONES
+        ======================================== */
+
+        @media (max-width: 380px) {
+
+            .card-top {
+
+                flex-wrap:
+                    wrap;
+            }
+
+
+            .dots-connector {
+
+                display:
+                    none;
+            }
+
+
+            .price-badge-container {
+
+                margin-left:
+                    auto;
+            }
+
+
+            .item-name {
+
+                font-size:
+                    1.08rem;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="menu-container">
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header class="menu-header">
+
+        <a href="index.html"
+           class="back-btn">
+
+            ← Kthehu
+
+        </a>
+
+
+        <h2 class="page-title">
+
+            Waffle
+
+        </h2>
+
+    </header>
+
+
+
+    <!-- =====================================
+         TAB
+    ====================================== -->
+
+    <nav class="tabs-container">
+
+        <button
+            class="tab-btn active"
+            data-tab="waffle"
+            onclick="switchTab('waffle', this)">
+
+            Waffle
+
+        </button>
+
+    </nav>
+
+
+
+    <!-- =====================================
+         PRODUCTS
+    ====================================== -->
+
+    <main>
+
+        <section
+            id="waffle"
+            class="tab-panel active">
+        </section>
+
+    </main>
+
+
+</div>
+
+
+
+<script>
+
+
+    /* ==========================================
+       WAFFLE PRODUCTS
+    ========================================== */
+
+    const menu = {
+
+        waffle: [
+
+            {
+                name: "Waffle e thjeshtë",
+                price: "350 lekë",
+                desc: "Çokollatë e zezë, biskotë, akullore"
+            },
+
+
+            {
+                name: "Waffle Krem Biskote",
+                price: "400 lekë",
+                desc: "Krem biskote, reçel qershie, arra, shurup çokollate"
+            },
+
+
+            {
+                name: "Waffle Biscoff",
+                price: "450 lekë",
+                desc: "Krem Lotus, luleshtrydhe, biskotë, akullore"
+            },
+
+
+            {
+                name: "Waffle Tuti-Fruti",
+                price: "500 lekë",
+                desc: "Çokollatë, luleshtrydhe, arra, kivi, shurup çokollate"
+            },
+
+
+            {
+                name: "Waffle Tiramisu",
+                price: "500 lekë",
+                desc: "Krem biskote, Kahlua, luleshtrydhe"
+            },
+
+
+            {
+                name: "Waffle Haus-Special",
+                price: "500 lekë",
+                desc: "Nutella, luleshtrydhe, banane, biskotë, akullore"
+            },
+
+
+            {
+                name: "Waffle Pistachio Special",
+                price: "600 lekë",
+                desc: "Krem pistachio, luleshtrydhe, bajame, akullore"
+            },
+
+
+            {
+                name: "Waffle Oreo",
+                price: "450 lekë",
+                desc: "Çokollatë e bardhë, biskotë Oreo, akullore"
+            }
+
+        ]
+
+    };
+
+
+
+    /* ==========================================
+       CREATE PRODUCT CARD
+    ========================================== */
+
+    function createCard(product) {
+
+        return `
+
+            <article class="menu-card">
+
+                <div class="card-top">
+
+                    <span class="item-name">
+
+                        ${product.name}
+
+                    </span>
+
+
+                    <div class="dots-connector"></div>
+
+
+                    <div class="price-badge-container">
+
+                        <span class="item-price">
+
+                            ${product.price}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <p class="item-desc">
+
+                    ${product.desc}
+
+                </p>
+
+            </article>
+
+        `;
+    }
+
+
+
+    /* ==========================================
+       LOAD PRODUCTS
+    ========================================== */
+
+    function loadProducts() {
+
+        Object.keys(menu).forEach(category => {
+
+            const container =
+                document.getElementById(category);
+
+
+            container.innerHTML =
+                menu[category]
+                    .map(createCard)
+                    .join("");
+
+        });
+
+    }
+
+
+
+    /* ==========================================
+       TAB SWITCH
+    ========================================== */
+
+    function switchTab(tabId, clickedButton) {
+
+        const panels =
+            document.querySelectorAll(
+                ".tab-panel"
+            );
+
+
+        const buttons =
+            document.querySelectorAll(
+                ".tab-btn"
+            );
+
+
+        panels.forEach(panel => {
+
+            panel.classList.remove(
+                "active"
+            );
+
+        });
+
+
+        buttons.forEach(button => {
+
+            button.classList.remove(
+                "active"
+            );
+
+        });
+
+
+        const activePanel =
+            document.getElementById(tabId);
+
+
+        activePanel.classList.add(
+            "active"
+        );
+
+
+        clickedButton.classList.add(
+            "active"
+        );
+
+    }
+
+
+
+    /* ==========================================
+       START
+    ========================================== */
+
+    loadProducts();
+
+</script>
+
+
+</body>
+</html>
